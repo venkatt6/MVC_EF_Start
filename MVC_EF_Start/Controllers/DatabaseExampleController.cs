@@ -70,6 +70,33 @@ namespace MVC_EF_Start.Controllers
       dbContext.Quotes.Add(MyCompanyQuote1);
       dbContext.Quotes.Add(MyCompanyQuote2);
 
+            // Create Course object
+
+            Course MyCourse = new Course();
+
+            MyCourse.Name ="BAIS";
+            MyCourse.Credits = 33;
+
+            //Create Student object
+
+            Student MyStudent = new Student();
+
+            MyStudent.Name = "Venkat";
+            MyStudent.Location = "Tampa";
+
+            //Create Enrollment object
+
+            Enrollment MyEnrollment = new Enrollment();
+
+            MyEnrollment.course = MyCourse;
+            MyEnrollment.student = MyStudent;
+
+            MyEnrollment.Grade = "A+";
+
+            dbContext.Courses.Add(MyCourse);
+            dbContext.Students.Add(MyStudent);
+            dbContext.Enrollments.Add(MyEnrollment);
+
       dbContext.SaveChanges();
       
       // READ operation
