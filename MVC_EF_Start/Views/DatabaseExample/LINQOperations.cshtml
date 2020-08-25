@@ -1,15 +1,64 @@
-﻿@{
-  Layout = null;
+﻿@model List<MVC_EF_Start.Models.Enrollment>
+@{
+    Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-  <meta name="viewport" content="width=device-width" />
-  <title>LINQOperations</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <title>LINQOperations</title>
 </head>
 <body>
-  <h2>LINQ operations successful</h2>
+    <h2>Students with Grade A+</h2>
+    <table>
+        <tr>
+            <th>
+                Student ID
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Grade
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Location
+            </th>
+        </tr>
+        @foreach(var item in @Model)
+        {
+
+        
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.student.Name
+            </td>
+            <td>
+                @item.Grade
+            </td>
+            <td>
+                @item.course.Name
+            </td>
+            <td>
+                @item.student.Location
+            </td>
+        </tr>
+        }
+    </table>
+    
+    
 </body>
 </html>

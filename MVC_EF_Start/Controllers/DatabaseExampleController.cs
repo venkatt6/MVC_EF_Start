@@ -26,7 +26,8 @@ namespace MVC_EF_Start.Controllers
     public async Task<ViewResult> DatabaseOperations()
     {
       // CREATE operation
-      Company MyCompany = new Company();
+      /*
+            Company MyCompany = new Company();
       MyCompany.symbol = "MCOB";
       MyCompany.name = "ISM";
       MyCompany.date = "ISM";
@@ -69,20 +70,24 @@ namespace MVC_EF_Start.Controllers
       dbContext.Companies.Add(MyCompany);
       dbContext.Quotes.Add(MyCompanyQuote1);
       dbContext.Quotes.Add(MyCompanyQuote2);
-
+      */
             // Create Course object
 
             Course MyCourse = new Course();
 
             MyCourse.Name ="BAIS";
             MyCourse.Credits = 33;
+            //MyCourse.Id = 1;
 
             //Create Student object
 
             Student MyStudent = new Student();
 
-            MyStudent.Name = "Venkat";
-            MyStudent.Location = "Tampa";
+            MyStudent.Name = "Siva";
+            MyStudent.Location = "Orlando";
+            //MyStudent.Id = 1;
+            MyStudent.CourseId = 1;
+            MyStudent.EnrollmentId = 2;
 
             //Create Enrollment object
 
@@ -90,6 +95,7 @@ namespace MVC_EF_Start.Controllers
 
             MyEnrollment.course = MyCourse;
             MyEnrollment.student = MyStudent;
+            //MyEnrollment.Id = 1;
 
             MyEnrollment.Grade = "A+";
 
@@ -140,7 +146,43 @@ namespace MVC_EF_Start.Controllers
                               .Quotes
                               .FirstOrDefault();
 
-      return View();
+            List<Course> Courses = dbContext.Courses
+                             .Where(c => c.Name == "BAIS")
+                             .ToList();
+
+            List<Student> Students = dbContext.Students
+                             .Where(c => c.Name != " ").ToList();
+                             
+
+            Enrollment enrollment1 = dbContext.Enrollments
+                                     .Where(c => c.Grade == "A+")
+                                     .First();
+
+            List<Enrollment> enrollments = dbContext.Enrollments
+                .Where(c => c.Grade == "A+"
+                && c.student != null
+                && c.course != null)
+                                 .ToList();
+                                     
+
+
+
+
+            /*Student Student1 = dbContext.Students
+                             .Where(c => c.Name == "Venkat")
+                             .First();
+            Enrollment Enrollment1 = dbContext.Enrollments
+                                    .Include(c => c.student)
+                                    .Where(c => c.Grade == "A+")
+                                    .First();
+            */
+
+
+            /*ViewBag.Id = enrollment1.student.Id;
+            ViewBag.Grade = enrollment1.Grade;
+            */
+            return View(enrollments);
+            //return View();
     }
 
   }
